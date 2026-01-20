@@ -6,7 +6,7 @@ This repository contains our implementation of bounded fitting for the descripti
 
 
 ## SML-Benchmarks
-To reproduce Results shown in Table 1 (or Table 4 in the appendix), run
+The SML-Benchmarks can be obtained from <https://github.com/SmartDataAnalytics/SML-Bench>. In the scripts below they are expected to be in a folder sml-benchmarks at thesame level as this repositor. To reproduce results shown in Table 1 (or Table 4 in the appendix), run
 
 (row) Top: ``` uv run -m ijcai-benchmarks.cross-validation-top-bot  ```
 
