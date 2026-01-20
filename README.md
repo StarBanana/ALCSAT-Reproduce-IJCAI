@@ -1,29 +1,29 @@
-This repository contains our implementation of bounded fitting for the description logic ALC (ALSAT). As this is a Fork of <https://github.com/spell-system/SPELL>, it also contains SPELL, a tool to learn concepts in the description logic EL.
+This repository contains our implementation of bounded fitting for the description logic ALCQI(f) and instuctions on how to reproduce the results from the paper.
 
 ## Requirements
 - Installation of Python 3
-- Packages from `requirements.txt`
+- uv package manager
 
 
-## Run
-For full instructions on how to run either ALCSAT of SPELL, run
+## SML-Benchmarks
+To reproduce Results shown in Table 1 (or Table 4 in the appendix), run
 
-`python spell_cli.py --help`
+(row) Top: ``` uv run -m ijcai-benchmarks.cross-validation-top-bot  ```
+(row) EvoLearner: ``` uv run -m ijcai-benchmarks.cross-validation-evolearner  ```
+(row) TDL: ``` uv run -m ijcai-benchmarks.cross-validation-tdl  ```
+(row) Theorem 2: ``` uv run -m ijcai-benchmarks.bisim-extract  ```
+(row) Our Tool: ``` uv run -m ijcai-benchmarks.cross-validation-alcsat  ```
 
-The `--language` can be used to choose a syntactic fragment of ALC. The following fragments are available.
-- el: exists, and (using SPELL, default)
-- el_alcsat: exists, and (using ALCSAT)
-- fl0: forall, and
-- ex-or: exists, or
-- all-or: forall, or
-- elu: exists, and, or 
-- alc: forall, exists, and, or, neg
+For Table 2 run ``` uv run -m ijcai-benchmarks.intervals ```
+For Table 3 run ``` uv run -m ijcai-benchmarks.bisimulation ```
 
-The `--mode` options allows switching between exact mode and approximate mode.
-- `exact`: only consider exact fittings: concepts that cover all positive examples and exclude all negative examples
-- `neg_approx`: (SPELL only) search for an approximate fitting, that covers all positive examples but not necessarily excludes all negative examples
-- `full_approx`: search for an approximate fitting that may not cover some positive examples and may cover some negative examples
+In all these cases files with the data will be created, e.g. ```reproducereproduce-table1-therorem2.txt```. These files contain all data from which results shown in the table were created. For Table 1, the actual values shown in the paper are the means and standard deviations computed from this data. By running ```uv run -m ijcai-benchmarks.process-cross-validation-output <path to one of the files for table1>``` the means and standard deviations are computed for the file given file and then printed in LaTeX compatible code which was then used directly to generate Table 1.
 
-## ISWC2025 Benchmark Reproduction
-Instructions to reproduce the family benchmarks are in the folder alc_benchmarks in a separate README file. Instructions and required files to reproduce the results on the SML benchmarks can be found in the following repository.
-https://github.com/SAT-based-Concept-Learning/ALC-SAT-eval
+
+For Table 5 (appendix) run ``` uv run -m ijcai-benchmarks.parallel ``` results will be shown in standard output.
+
+
+## YAGO ALCQ Benchmarks
+To reproduce results from Figure 1, run 
+``` uv run -m alc_benchmarks.alc_benchmark ```
+In each of the benchmarks in ```alcq_benchmarks/alcq_bisim_combined``` a file ```results.json``` will be created containing accuracies, f1 scores, concept sizes and concepts reported by the respective tools. In addition two files ```alcq_benchmarks/alcq_bisim_combined/data.csv``` and ```alcq_benchmarks/alcq_bisim_combined/data_avg.csv``` are created. The file ```alcq_benchmarks/alcq_bisim_combined/data_avg.csv``` contains the data points shown in Figure 1.

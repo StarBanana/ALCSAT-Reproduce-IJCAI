@@ -5,7 +5,7 @@ import pandas as pd
 csv.field_size_limit(sys.maxsize)
 
 # Path to your file
-file_path = "reproduce-table1-our-tool.txt"
+file_path = sys.argv[1]
 
 
 # Read CSV-like text file (comma-separated)
